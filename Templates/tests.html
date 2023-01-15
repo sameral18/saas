@@ -1,0 +1,55 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+
+ <h2 class="justify-content-center d-flex mt-3 mb-3" style="color:blue;  text-decoration: overline underline;">Tests List</h2>
+
+
+        <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+                <th scope="col">Course Name</th>
+
+              <th scope="col">Discription</th>
+
+      <th scope="col">Result</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for course in Course %}
+            {% csrf_token %}
+
+    <tr>
+      <th scope="row">{{ test.id }}</th>
+        {% if course.usertest.first_name is not null %}
+      <td>{{ course.name }}</td>
+              <td>{{ course.discription }}</td>
+
+        {% endif %}
+
+
+<!--       {{request.user}}-->
+
+    </tr>
+        {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock content %}

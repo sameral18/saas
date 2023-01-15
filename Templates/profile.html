@@ -1,0 +1,131 @@
+
+    {%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+My Profile
+{% endblock title %}
+
+
+{% block navbar %}
+
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+<section class="bg-light mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-4 mb-sm-5">
+                <div class="card card-style1 border-0">
+                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+                            </div>
+                            <div class="col-lg-6 px-xl-10">
+                                <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <h3 class="h2 text-white mb-0">{{request.user.username}}</h3>
+                                </div>
+                                <ul class="list-unstyled mb-1-9">
+                                    <br>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">First name:</span> {{request.user.first_name}}</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Last name:</span> {{request.user.last_name}}</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> {{request.user.email}}</li>
+
+                                        {% if request.user.point != null %}
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Points:</span> {{request.user.point}}</li>
+                                        {% endif %}
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+<div class="row">
+
+    {% for course in Course %}
+    {% if course.course_points <= request.user.point %}
+    <div class="col-md-4 mt-1 ">
+        <div class="card mdb-color lighten-2 text-center z-depth-2">
+            <div class="card-body">
+                <form action="{% url 'profile' %}" method="POST">
+                    {% csrf_token %}
+                <h5 class="card-title" id="course_name">{{course.name}}</h5>
+                    <p class="card-text" id="course_description">{{course.description}}</p>
+                   <p class="card-text" id="course_point"><b>{{course.course_points}}</b> - Points</p>
+                    <input type="hidden" name="coursename" class="form-control" value={{course.name}}>
+                    <input type="hidden" name="coursedescription" class="form-control" value={{course.description}}>
+                    <input type="hidden" name="coursepoints" class="form-control" value={{course.course_points}}>
+
+                    <a href="https://www.youtube.com/results?search_query={{course.name}}">Show Course</a>
+           </form>
+            </div>
+
+        </div>
+    </div>
+
+
+        {% endif %}
+        {% endfor %}
+
+
+    {% if request.user.role == 1 %}
+         <div class="col-md-4 mt-1 ">
+        <div class="card mdb-color lighten-2 text-center z-depth-2">
+            <div class="card-body">
+                <form action="{% url 'profile' %}" method="POST">
+                    {% csrf_token %}
+                <a href="{% url 'all-courses' %}"><h2 class="card-title" >{{ Course.count }} Courses</h2></a>
+
+           </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4 mt-1 ">
+        <div class="card mdb-color lighten-2 text-center z-depth-2">
+           <div class="card-body">
+                <form action="{% url 'profile' %}" method="POST">
+                    {% csrf_token %}
+               <a href="{% url 'all-workers' %}"> <h2 class="card-title" >{{ UserWorker.count }} Workers</h2></a>
+
+           </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4 mt-1 ">
+        <div class="card mdb-color lighten-2 text-center z-depth-2">
+            <div class="card-body">
+                <form action="{% url 'profile' %}" method="POST">
+                    {% csrf_token %}
+                <a href="{% url 'all-students' %}" style=""><h2 class="card-title" >{{ UserStudent.count }} Students</h2></a>
+
+           </form>
+            </div>
+
+        </div>
+    </div>
+
+    {% endif %}
+    </div>
+<br>
+
+
+
+
+        </div>
+    </div>
+</section>
+</div>
+
+{% endblock content %}

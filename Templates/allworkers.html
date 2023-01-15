@@ -1,0 +1,41 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+<div class="mt-5">
+ <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for worker in object_list %}
+      {% if worker.role == 3 %}
+      <tr>
+        
+        <td>{{worker.username}}</td>
+        <td>{{worker.first_name}}</td>
+        <td>{{worker.last_name}}</td>
+        <td>{{worker.email}}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{% endblock content %}
