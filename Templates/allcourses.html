@@ -1,0 +1,37 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+<div class="mt-5">
+ <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Course name</th>
+        <th>Description </th>
+        <th>Points</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for course in object_list %}
+      <tr>
+        
+        <td>{{course.name}}</td>
+        <td>{{course.description}}</td>
+        <td>{{course.course_points}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+<form method="POST" action="" enctype="multipart/form-data" class="mt-3 justify-content-center">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <input class="btn btn-dark" type="submit" name="Update" placeholder=>
+</form>
+
+{% endblock content %}
+
