@@ -1,0 +1,23 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+<h2>Delete user confirm Page</h2>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete account</button>
+</form>
+{% endblock content %}
