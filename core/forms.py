@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Course
+from .models import User, Course,Message
 from django.forms import ModelForm
 
 
@@ -15,6 +15,14 @@ class AddCourseForm(ModelForm):
     class Meta:
         model = Course
         fields = ['name','description']
+
+
+
+class AddMessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields=['to','msg_from','subject','message']
+
 
 
 class AddWorkerForm(UserCreationForm):

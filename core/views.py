@@ -1,10 +1,10 @@
-from .models import User, Course
+from .models import User, Course,Message
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView,UpdateView
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
-from .forms import SignupForm, AddCourseForm, AddWorkerForm,AddStudentForm
+from .forms import SignupForm, AddCourseForm, AddWorkerForm,AddStudentForm,AddMessageForm
 from django.views.generic import ListView
 
 
@@ -103,9 +103,25 @@ class all_workersView(ListView):
 
 
 
+class add_messageView(CreateView):
+    model = Message
+    form_class = AddMessageForm
+    template_name = 'add-message.html'
+    success_url = '/profile/'
+
+class all_messagesView(ListView):
+    model = Message
+    template_name = 'message.html'
+
+
 
 def TestView(request):
     userModel= User.objects.all()
     testModel=Course.objects.all()
     return render(request,'courses.html',{'User':userModel,'Test':testModel})
 
+class DeleteUser(DeleteView):
+    model = User
+    template_name = 'delete_user_confirm.html'
+    success_message='user deleted'
+    success_url = '/'

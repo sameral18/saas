@@ -21,5 +21,10 @@ path('all-students/',all_studentsView.as_view(),name='all-students'),
 
 path('profile/',profile,name='profile'),
 path('account-settings/',AccountSettingsView.as_view(),name='account-settings'),
+path('delete_user/<int:pk>',DeleteUser.as_view(),name='delete_account'),
+
+
+path('message/',all_messagesView.as_view(),name='message'),
+path('add-message/',add_messageView.as_view(),name='add-message'),
 
 ]
